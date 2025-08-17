@@ -10,7 +10,7 @@ A powerful, modern, and collaborative **slide editor and presenter** built using
 - ✏️ Rich text editing and formatting
 - 🧩 Slide elements (text, images, shapes, etc.)
 - 🧭 Slide navigation and preview panel
-- 📤 Export as PDF or shareable URL
+- 📤 Export Reveal JS or Json Format
 - 🧠 AI create the slide for you.
 - 🤖 AI Enhancement: Advanced AI customization for improved slide suggestions.
 - 🎬 Animation: Preview and edit mode available for dynamic presentations.
@@ -49,11 +49,10 @@ Make sure to replace the placeholder text with your actual API keys.
 
 ## 🔧 Improvements
 
-- Optimise Reveal.js code for accurate visualization of editor content.
-- Retain data on refresh using local storage.
-- Add dark mode to the presentation.
-- Improve the prompt for better clarity.
-- Make the editor smoother for enhanced user experience.
+- [ ] Optimise Reveal.js code for accurate visualization of editor content.
+- [ ] Add dark mode to the presentation.
+- [ ] Improve the prompt for better clarity.
+- [ ] Make the editor smoother for enhanced user experience.
 
 ---
 
