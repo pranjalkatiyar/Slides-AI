@@ -88,6 +88,8 @@ export function GrapesJSCanvas({
   const [audioUrl, setAudioUrl] = useState("")
   const [imageUrl, setImageUrl] = useState("")
   const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false)
+  const [showImageInput, setShowImageInput] = useState(false)
+  const [showAudioInput, setShowAudioInput] = useState(false)
 
   // Auto-play animations when slide is playing
   useEffect(() => {
@@ -1138,13 +1140,13 @@ export function GrapesJSCanvas({
                       value={slide.title}
                       onChange={(e) => onUpdateSlide({ title: e.target.value })}
                       placeholder="Slide Title"
-                      className="text-2xl font-bold border-none bg-gray-200 p-2 focus:ring-0"
+                      className="text-2xl font-bold border-none bg-gray-200 p-2 focus:ring-0 max-w-[500px]"
                     />
                     <Input
                       value={slide.summary}
                       onChange={(e) => onUpdateSlide({ summary: e.target.value })}
                       placeholder="Slide Summary"
-                      className="text-lg text-gray-600 border-none bg-gray-200 p-2 focus:ring-0 mt-2"
+                      className="text-lg text-gray-600 border-none bg-gray-200 p-2 focus:ring-0 mt-2 max-w-[500px]"
                     />
                   </div>
                 ) : (
@@ -1156,61 +1158,102 @@ export function GrapesJSCanvas({
               </div>
 
               {/* Controls */}
-              <div className="flex items-center gap-4 overflow-auto">
+              <div className="flex items-center gap-4 col overflow-auto">
                 {!isPreviewMode && (
                   <>
                     
 
                     {/* Image Controls */}
-                    <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm" onClick={() => handleImageUpload()}>
+                    <div className="flex-col items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowImageInput((v) => !v)}
+                      >
                         📁 Upload Image
                       </Button>
-                      <div className="flex items-center fgap-1">
-                        <Input
-                          value={imageUrl}
-                          onChange={(e) => setImageUrl(e.target.value)}
-                          placeholder="Image URL..."
-                          className="w-40 h-8"
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
+                      {showImageInput && (
+                        <div className="flex items-center gap-1 mt-2">
+                          <Input
+                            value={imageUrl}
+                            onChange={(e) => setImageUrl(e.target.value)}
+                            placeholder="Image URL..."
+                            className="w-40 h-8"
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                handleImageUrlSubmit()
+                                setShowImageInput(false)
+                              }
+                            }}
+                          />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
                               handleImageUrlSubmit()
-                            }
-                          }}
-                        />
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleImageUrlSubmit()}
-                          disabled={!imageUrl.trim()}
-                        >
-                          Add
-                        </Button>
-                      </div>
+                              setShowImageInput(false)
+                            }}
+                            disabled={!imageUrl.trim()}
+                          >
+                            Add
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setShowImageInput(false)}
+                            title="Cancel"
+                          >
+                            ✖
+                          </Button>
+                        </div>
+                      )}
                     </div>
 
                     {/* Audio Controls */}
-                    <div className="flex items-center gap-2">
-                      <Button variant="outline" size="sm" onClick={handleAudioUpload}>
+                    <div className="flex-col items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowAudioInput((v) => !v)}
+                      >
                         <Volume2 className="w-4 h-4 mr-2" />
                         {slide.audio ? "Replace" : "Add"} Audio
                       </Button>
-                      <div className="flex items-center gap-1">
-                        <Input
-                          value={audioUrl}
-                          onChange={(e) => setAudioUrl(e.target.value)}
-                          placeholder="Audio URL..."
-                          className="w-40 h-8"
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
+                      {showAudioInput && (
+                        <div className="flex items-center gap-1 mt-2">
+                          <Input
+                            value={audioUrl}
+                            onChange={(e) => setAudioUrl(e.target.value)}
+                            placeholder="Audio URL..."
+                            className="w-40 h-8"
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") {
+                                handleAudioUrlSubmit()
+                                setShowAudioInput(false)
+                              }
+                            }}
+                          />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
                               handleAudioUrlSubmit()
-                            }
-                          }}
-                        />
-                        <Button variant="outline" size="sm" onClick={handleAudioUrlSubmit} disabled={!audioUrl.trim()}>
-                          Add
-                        </Button>
-                      </div>
+                              setShowAudioInput(false)
+                            }}
+                            disabled={!audioUrl.trim()}
+                          >
+                            Add
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setShowAudioInput(false)}
+                            title="Cancel"
+                          >
+                            ✖
+                          </Button>
+                        </div>
+                      )}
                     </div>
                   </>
                 )}

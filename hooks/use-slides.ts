@@ -84,12 +84,16 @@ export function useSlides() {
   )
 
   const addElement = useCallback(
-    (type: "text" | "image" | "quiz" | "code" | "list") => {
+    (type: "text" | "image" | "quiz" | "code" | "list" | "title" | "summary") => {
       const newElement: SlideElement = {
         id: `el-${Date.now()}`,
         type,
         content:
-          type === "text"
+        type === "title"
+          ? "New Slide Title"
+          : type === "summary"
+            ? "New summary content"
+          : type === "text"
             ? "New text content"
             : type === "image"
               ? "/placeholder.svg?height=200&width=300"
@@ -101,8 +105,8 @@ export function useSlides() {
         x: Math.random() * 200 + 50,
         y: Math.random() * 200 + 100,
         width: type === "image" ? 300 : type === "code" ? 400 : type === "list" ? 250 : undefined,
-        height: type === "image" ? 200 : type === "code" ? 200 : type === "list" ? 150 : undefined,
-        fontSize: type === "text" ? 16 : type === "code" ? 14 : type === "list" ? 14 : undefined,
+        height: type === "image" ? 200 : type === "code" ? 200 : type === "list" ? 150 :undefined,
+        fontSize: type === "title" ? 22 : type === "summary" ? 16 : type === "text" ? 16 : type === "code" ? 14 : type === "list" ? 14 : 18,
         minWidth: type === "image" ? 100 : type === "code" ? 200 : type === "list" ? 150 : 50,
         minHeight: type === "image" ? 50 : type === "code" ? 100 : type === "list" ? 80 : 30,
         maxWidth: 800,

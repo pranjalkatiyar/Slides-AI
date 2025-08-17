@@ -141,8 +141,8 @@ export function RevealExportDialog({ open, onOpenChange, slides, currentSlide }:
         if (slide.backgroundSize) slideAttrs.push(`data-background-size="${slide.backgroundSize}"`)
 
         // Calculate proper spacing for title and subtitle
-        const titleHeight = slide.title ? 60 : 0
-        const subtitleHeight = slide.summary ? 40 : 0
+        const titleHeight = slide.title ? 40 : 0
+        const subtitleHeight = slide.summary ? 20 : 0
         const headerHeight = titleHeight + subtitleHeight + (slide.title && slide.summary ? 20 : 0)
 
         // Create elements with proper positioning and animations
@@ -244,8 +244,8 @@ export function RevealExportDialog({ open, onOpenChange, slides, currentSlide }:
         return `
     <section ${slideAttrs.join(" ")}>
       <div class="slide-content" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
-        ${slide.title ? `<h1 style="position: absolute; top: 20px; left: 20px; right: 20px; z-index: 100; margin: 0; line-height: 1.2;">${slide.title}</h1>` : ""}
-        ${slide.summary ? `<h2 style="position: absolute; top: ${slide.title ? "80px" : "20px"}; left: 20px; right: 20px; font-size: 1.2em; color: #666; z-index: 100; margin: 0; line-height: 1.4;">${slide.summary}</h2>` : ""}
+        ${slide.title ? `<h2 style="position: absolute; top: 20px; left: 20px; right: 20px; z-index: 100; margin: 0; line-height: 1.2;">${slide.title}</h2>` : ""}
+        ${slide.summary ? `<h3 style="position: absolute; top: ${slide.title ? "80px" : "20px"}; left: 20px; right: 20px; font-size: 1.2em; color: #666; z-index: 100; margin: 0; line-height: 1.4;">${slide.summary}</h3>` : ""}
         <div class="elements-container" style="position: absolute; top: ${headerHeight + 20}px; left: 0; right: 0; bottom: 0;">
           ${elementsHTML}
         </div>
@@ -440,7 +440,9 @@ export function RevealExportDialog({ open, onOpenChange, slides, currentSlide }:
       transition: '${config.transition}',
       transitionSpeed: '${config.transitionSpeed}',
       backgroundTransition: '${config.backgroundTransition}',
-
+      width: '100%',
+      height: '100%',
+      zoom:'0',
       plugins: [${pluginScripts.join(", ")}]
     });
 

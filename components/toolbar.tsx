@@ -24,10 +24,17 @@ import {
   Sparkles,
   Settings,
   Grip,
+  Heading,
 } from "lucide-react"
 import type { Slide, SlideTheme } from "@/types/slide-types"
 
 const ELEMENT_BUTTONS = [
+  {
+    type:"title" as const,
+    icon: Heading,
+    label: "Title",
+    colors: "bg-gray-50 hover:bg-gray-100 border-gray-200"
+  },
   {
     type: "text" as const,
     icon: Type,
@@ -138,7 +145,7 @@ export function Toolbar({
             {!isCollapsed && (
               <>
                 {/* Theme Selector */}
-                <div className="flex items-center gap-2">
+                {/* <div className="flex items-center gap-2">
                   <Palette className="w-4 h-4 text-gray-600" />
                   <Select
                     value={theme.id}
@@ -158,9 +165,9 @@ export function Toolbar({
                       ))}
                     </SelectContent>
                   </Select>
-                </div>
+                </div> */}
 
-                <Separator orientation="vertical" className="h-6" />
+                {/* <Separator orientation="vertical" className="h-6" /> */}
 
                 {/* Add Elements */}
                 {!isPreviewMode && (

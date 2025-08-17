@@ -1,6 +1,6 @@
 export interface SlideElement {
   id: string
-  type: "text" | "image" | "quiz" | "code" | "list"
+  type: "text" | "image" | "quiz" | "code" | "list" | "title" | "summary"
   content: string
   x?: number
   y?: number

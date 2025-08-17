@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,6 +11,7 @@ import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { Settings, Palette, Play, StickyNote, Layers, ChevronLeft, ChevronRight } from "lucide-react"
 import type { Slide, SlideElement } from "@/types/slide-types"
+import { Slider } from "@/components/ui/slider"
 
 interface SlidePropertiesPanelProps {
   slide: Slide
@@ -43,10 +44,20 @@ export function SlidePropertiesPanel({
 }: SlidePropertiesPanelProps) {
   const [activeTab, setActiveTab] = useState<"slide" | "element">("slide")
   const [isPanelCollapsed, setIsPanelCollapsed] = useState(false)
+  const [debouncedColor, setDebouncedColor] = useState(slide.backgroundColor || "#ffffff")
 
-  const handleSlideUpdate = (field: keyof Slide, value: any) => {
+  const handleSlideUpdate = useCallback((field: keyof Slide, value: any) => {
     onUpdateSlide({ [field]: value })
-  }
+  }, [onUpdateSlide])
+
+  const handleColorChange = useCallback((value: string) => {
+    setDebouncedColor(value)
+    // Only update after 100ms of no changes
+    const timeoutId = setTimeout(() => {
+      handleSlideUpdate("backgroundColor", value)
+    }, 100)
+    return () => clearTimeout(timeoutId)
+  }, [handleSlideUpdate])
 
   const handleElementUpdate = (field: keyof SlideElement, value: any) => {
     if (selectedElement) {
@@ -156,13 +167,13 @@ export function SlidePropertiesPanel({
                     <div className="flex gap-2">
                       <Input
                         type="color"
-                        value={slide.backgroundColor || "#ffffff"}
-                        onChange={(e) => handleSlideUpdate("backgroundColor", e.target.value)}
+                        value={debouncedColor}
+                        onChange={(e) => handleColorChange(e.target.value)}
                         className="w-12 h-8 p-1 border rounded"
                       />
                       <Input
-                        value={slide.backgroundColor || "#ffffff"}
-                        onChange={(e) => handleSlideUpdate("backgroundColor", e.target.value)}
+                        value={debouncedColor}
+                        onChange={(e) => handleColorChange(e.target.value)}
                         placeholder="#ffffff"
                         className="flex-1 h-8"
                       />
@@ -336,26 +347,32 @@ export function SlidePropertiesPanel({
 
                       <div className="space-y-2">
                         <Label className="text-xs">Background Opacity</Label>
-                        <Input
-                          type="range"
-                          min="0"
-                          max="1"
-                          step="0.1"
-                          value={(() => {
+                        <div className="flex items-center gap-2">
+                          <Slider
+                            min={0}
+                            max={1}
+                            step={0.1}
+                            value={(() => {
+                              const bg = selectedElement.backgroundColor || "rgba(255, 255, 255, 0.9)"
+                              const match = bg.match(/rgba?\([^,]+,[^,]+,[^,]+,?\s*([^)]*)\)/)
+                              return [Number(match ? match[1] || "0.9" : "0.9")]
+                            })()}
+                            onValueChange={([val]) => {
+                              const bg = selectedElement.backgroundColor || "rgba(255, 255, 255, 0.9)"
+                              const colorMatch = bg.match(/rgba?\(([^,]+),\s*([^,]+),\s*([^,]+)/)
+                              if (colorMatch) {
+                                const newBg = `rgba(${colorMatch[1]}, ${colorMatch[2]}, ${colorMatch[3]}, ${val})`
+                                handleElementUpdate("backgroundColor", newBg)
+                              }
+                            }}
+                            className="w-32"
+                          />
+                          <span className="text-xs w-8 text-right">{(() => {
                             const bg = selectedElement.backgroundColor || "rgba(255, 255, 255, 0.9)"
-                            const match = bg.match(/rgba?$$[^,]+,[^,]+,[^,]+,?\s*([^)]*)$$/)
+                            const match = bg.match(/rgba?\([^,]+,[^,]+,[^,]+,?\s*([^)]*)\)/)
                             return match ? match[1] || "0.9" : "0.9"
-                          })()}
-                          onChange={(e) => {
-                            const bg = selectedElement.backgroundColor || "rgba(255, 255, 255, 0.9)"
-                            const colorMatch = bg.match(/rgba?\(([^,]+),\s*([^,]+),\s*([^,]+)/)
-                            if (colorMatch) {
-                              const newBg = `rgba(${colorMatch[1]}, ${colorMatch[2]}, ${colorMatch[3]}, ${e.target.value})`
-                              handleElementUpdate("backgroundColor", newBg)
-                            }
-                          }}
-                          className="h-8"
-                        />
+                          })()}</span>
+                        </div>
                       </div>
                     </>
                   )}

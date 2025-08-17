@@ -71,9 +71,9 @@ export function SlideMenu({
 
   return (
     <div
-      className={`${isCollapsed ? "w-16" : "w-80"} bg-white border-r border-gray-200 flex flex-col transition-all duration-300`}
+      className={`${isCollapsed ? "w-16" : "w-80"} bg-white border-r overflow-auto border-gray-200 flex flex-col transition-all duration-300`}
     >
-      <div className="p-4 border-b border-gray-200">
+      <div className="p-2 border-b border-gray-200">
         <div className="flex items-center justify-between mb-3">
           <h2 className={`text-lg font-semibold text-gray-900 ${isCollapsed ? "hidden" : ""}`}>Slides</h2>
           <Button variant="ghost" size="sm" onClick={() => setIsCollapsed(!isCollapsed)} className="p-1">
@@ -131,7 +131,7 @@ export function SlideMenu({
         />
       </div>
 
-      <ScrollArea className="flex-1 overflow-x-auto">
+      <ScrollArea className="flex overflow-auto">
         <div className="p-2">
           {filteredSlides.map((slide, idx) => {
             const originalIdx = slides.findIndex((s) => s.id === slide.id)
@@ -156,8 +156,8 @@ export function SlideMenu({
                     </span>
                   </div>
                 ) : (
-                  <div className="flex items-start gap-2">
-                    <GripVertical className="w-4 h-4 text-gray-400 mt-1 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="flex items-start gap-2 max-w-[17rem]">
+                    <GripVertical className="w-2 h-2 text-gray-400 mt-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <h3 className={`font-medium truncate ${isActive ? "text-blue-900" : "text-gray-900"}`}>
