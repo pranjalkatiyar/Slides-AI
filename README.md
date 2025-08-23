@@ -2,6 +2,8 @@
 
 A powerful, modern, and collaborative **slide editor and presenter** built using **Next.js**. This app allows users to create, edit, and present beautiful, responsive presentations with ease.
 
+Video URL : https://drive.google.com/file/d/13oECvXXW0NEdJfFbgLcYf6Jp6sahQbiw/view?usp=sharing
+
 ---
 
 ## 🚀 Features
@@ -17,9 +19,25 @@ A powerful, modern, and collaborative **slide editor and presenter** built using
 
 ---
 
+## Video
+
+[![Watch Video](./example/Slides-AI.mp4)]
+
+---
+
+## Image
+
+![alt text](./example//image1.png)
+
+![alt text](./example//image3.png)
+
+![alt text](./example//image4.png)
+
+---
+
 ## ⚙️ Tech Stack
 
-    **Next.js,
+        **Next.js
 	TypeScript
 	Shadcn
 	Radix UI
