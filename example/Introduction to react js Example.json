@@ -1,0 +1,250 @@
+{
+  "slides": [
+    {
+      "id": "slide-1",
+      "title": "Welcome",
+      "summary": "Introduction to the course",
+      "elements": [
+        {
+          "id": "el-1",
+          "type": "text",
+          "content": "Welcome to the interactive course!",
+          "x": 50,
+          "y": 100,
+          "fontSize": 24
+        }
+      ]
+    },
+    {
+      "id": "slide-1755974712660-itsotc4rb",
+      "title": "Introduction to React JS",
+      "summary": "Discover what React JS is and its core purpose in modern web development.",
+      "elements": [
+        {
+          "id": "el-react-1-1",
+          "type": "text",
+          "content": "\"React is a free and open-source front-end JavaScript library for building user interfaces based on UI components.\"",
+          "x": 20,
+          "y": 0,
+          "width": 400,
+          "height": "auto",
+          "fontSize": 20,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        },
+        {
+          "id": "el-react-1-2",
+          "type": "list",
+          "content": "Declarative: Makes your code more predictable and easier to debug.\nComponent-Based: Build encapsulated components that manage their own state.\nLearn Once, Write Anywhere: Develop new features in React without rewriting existing code.\n",
+          "x": 40,
+          "y": 240,
+          "width": 400,
+          "height": "auto",
+          "fontSize": 18,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        },
+        {
+          "id": "el-react-1-3",
+          "type": "image",
+          "content": "\"https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg\"",
+          "x": 500,
+          "y": 60,
+          "width": 300,
+          "height": 300,
+          "fontSize": 16,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        }
+      ],
+      "transcript": "Welcome to the exciting world of React JS! On this first slide, we're introducing React as a powerful, open-source JavaScript library. Its main goal is to help you build interactive user interfaces efficiently. React is declarative, meaning you describe what you want, and React figures out how to render it. It's also component-based, allowing you to break down your UI into reusable, independent pieces. And the best part? You can 'learn once, write anywhere'—meaning your React knowledge is portable across different platforms.",
+      "backgroundColor": "#ffffff"
+    },
+    {
+      "id": "slide-1755974712660-mvptcyuaq",
+      "title": "Why Choose React?",
+      "summary": "Explore the key advantages that make React a popular choice for web development.",
+      "elements": [
+        {
+          "id": "el-react-2-1",
+          "type": "list",
+          "content": "Virtual DOM: Improves performance by minimizing direct manipulation of the browser's DOM.\nComponent Reusability: Encourages building reusable UI components, speeding up development.\nStrong Community Support: A large and active community offers extensive resources and tools.\nDeclarative Views: Makes code more predictable and easier to debug.\nOne-Way Data Binding: Simplifies data flow and makes debugging easier.\n",
+          "x": 40,
+          "y": 20,
+          "width": 400,
+          "height": "auto",
+          "fontSize": 18,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        },
+        {
+          "id": "el-react-2-2",
+          "type": "image",
+          "content": "\"https://miro.medium.com/v2/resize:fit:1400/1*xV9a4b3C_WvjF6pYQkGj3g.png\"",
+          "x": 540,
+          "y": 140,
+          "width": 350,
+          "height": 200,
+          "fontSize": 16,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        }
+      ],
+      "transcript": "So, why should you choose React for your next project? One of its biggest strengths is the Virtual DOM. This clever mechanism allows React to update only the necessary parts of the actual browser DOM, leading to significant performance improvements. React's component-based architecture promotes reusability, meaning you write less code and develop faster. Plus, it boasts a massive and supportive community, providing a wealth of learning materials and solutions. Its declarative nature and one-way data binding also contribute to more predictable and maintainable code.",
+      "backgroundColor": "#ffffff"
+    },
+    {
+      "id": "slide-1755974712661-t9618kt1k",
+      "title": "Core Concept: Components",
+      "summary": "Understand React components as the fundamental building blocks of a React application.",
+      "elements": [
+        {
+          "id": "el-react-3-1",
+          "type": "text",
+          "content": "\"Components are independent, reusable pieces of UI. They let you split the UI into independent, reusable pieces, and think about each piece in isolation.\"",
+          "x": 50,
+          "y": 100,
+          "width": 400,
+          "height": "auto",
+          "fontSize": 20,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        },
+        {
+          "id": "el-react-3-2",
+          "type": "list",
+          "content": "Functional Components: JavaScript functions that return JSX. (e.g., `function Welcome(props) { return <h1>Hello, {props.name}</h1>; }`)\nClass Components: ES6 classes that extend `React.Component` and have a `render()` method. (Less common in modern React for new features).\n",
+          "x": 70,
+          "y": 180,
+          "width": 400,
+          "height": "auto",
+          "fontSize": 18,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        },
+        {
+          "id": "el-react-3-3",
+          "type": "image",
+          "content": "\"https://miro.medium.com/v2/resize:fit:1400/1*I8G9hM_0w0l0eQ9k40L93Q.jpeg\"",
+          "x": 90,
+          "y": 260,
+          "width": 350,
+          "height": 250,
+          "fontSize": 16,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        }
+      ],
+      "transcript": "At the heart of every React application are components. Think of them as individual LEGO bricks that you can combine to build complex structures. Each component is a self-contained unit of UI, responsible for rendering a specific part of your application. We primarily work with functional components today, which are simple JavaScript functions returning JSX, our UI description. While class components exist, functional components with Hooks are the modern standard for writing React code.",
+      "backgroundColor": "#ffffff"
+    },
+    {
+      "id": "slide-1755974712661-lm5a80trd",
+      "title": "JSX: JavaScript XML",
+      "summary": "Learn about JSX, a syntax extension that allows you to write HTML-like code within JavaScript.",
+      "elements": [
+        {
+          "id": "el-react-4-1",
+          "type": "text",
+          "content": "\"JSX (JavaScript XML) is a syntax extension for JavaScript that looks like HTML. It allows you to write HTML elements and components in the same file as JavaScript code.\"",
+          "x": 50,
+          "y": 100,
+          "width": 400,
+          "height": "auto",
+          "fontSize": 20,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        },
+        {
+          "id": "el-react-4-2",
+          "type": "text",
+          "content": "\"Example:\\n```jsx\\nconst element = <h1>Hello, React!</h1>;\\nReactDOM.render(element, document.getElementById('root'));\\n```\"",
+          "x": 70,
+          "y": 180,
+          "width": 450,
+          "height": 150,
+          "fontSize": 16,
+          "color": "#f8f8f2",
+          "backgroundColor": "#333"
+        },
+        {
+          "id": "el-react-4-3",
+          "type": "list",
+          "content": "Makes UI code more readable and intuitive.\nEnables React to provide more useful error and warning messages.\nGets compiled into regular JavaScript by tools like Babel.\n",
+          "x": 90,
+          "y": 260,
+          "width": 400,
+          "height": "auto",
+          "fontSize": 18,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        }
+      ],
+      "transcript": "Next up is JSX, a key part of React's appeal. JSX is not HTML, nor is it a string; it's a syntax extension that lets you write HTML-like structures directly within your JavaScript code. This makes your UI code incredibly readable and intuitive, bridging the gap between structure and logic. Behind the scenes, tools like Babel transform your JSX into plain JavaScript objects that React can understand. This powerful feature enables React to give you more helpful errors and warnings, streamlining your development process.",
+      "backgroundColor": "#ffffff"
+    },
+    {
+      "id": "slide-1755974712661-1dfcp56yp",
+      "title": "Getting Started: First React App",
+      "summary": "Learn the basic steps to set up and run your very first React application.",
+      "elements": [
+        {
+          "id": "el-react-5-1",
+          "type": "text",
+          "content": "\"To begin building with React, you'll need Node.js and npm (Node Package Manager) installed on your system.\"",
+          "x": 50,
+          "y": 100,
+          "width": 400,
+          "height": "auto",
+          "fontSize": 20,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        },
+        {
+          "id": "el-react-5-2",
+          "type": "list",
+          "content": "1. Install Node.js: Download from nodejs.org (includes npm).\n2. Create a new React project: Open your terminal and run `npx create-react-app my-first-app`.\n3. Navigate to your project: `cd my-first-app`.\n4. Start the development server: `npm start`.\n",
+          "x": 70,
+          "y": 180,
+          "width": 400,
+          "height": "auto",
+          "fontSize": 18,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        },
+        {
+          "id": "el-react-5-3",
+          "type": "image",
+          "content": "\"https://www.freecodecamp.org/news/content/images/2021/08/create-react-app.png\"",
+          "x": 90,
+          "y": 260,
+          "width": 350,
+          "height": 250,
+          "fontSize": 16,
+          "color": "#000000",
+          "backgroundColor": "rgba(255, 255, 255, 0.9)"
+        }
+      ],
+      "transcript": "Ready to dive in and create your own React app? It's easier than you think! First, ensure you have Node.js and npm installed, which are essential for managing JavaScript packages and running development tools. Then, with a simple command, `npx create-react-app`, you can scaffold a new React project with all the necessary configurations. Navigate into your new project directory and, finally, run `npm start` to launch your development server. This will open your new React app in your browser, ready for you to make your first changes. Happy coding!",
+      "backgroundColor": "#ffffff"
+    },
+    {
+      "id": "slide-2",
+      "title": "Overview",
+      "summary": "What you will learn",
+      "elements": [
+        {
+          "id": "el-2",
+          "type": "text",
+          "content": "This course covers all the basics.",
+          "x": 50,
+          "y": 100,
+          "fontSize": 18
+        }
+      ]
+    }
+  ],
+  "exportedAt": "2025-08-23T18:46:04.167Z",
+  "format": "slide-editor-v2",
+  "version": "2.0.0"
+}

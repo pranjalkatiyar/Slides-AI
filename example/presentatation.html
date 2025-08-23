@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>My Presentation</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/theme/white.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+
+  <style>
+    .reveal .slides section {
+      text-align: left;
+      height: 100vh;
+    }
+    
+    .slide-content {
+      position: relative !important;
+      width: 100% !important;
+      height: 100vh !important;
+    }
+    
+    .elements-container {
+      position: relative !important;
+    }
+    
+    .text-element {
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    
+    .quiz-container {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      max-width: 500px;
+    }
+    
+    .quiz-container h3 {
+      margin-top: 0;
+      color: #495057;
+    }
+    
+    .quiz-options {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .quiz-option {
+      background: #fff;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      padding: 10px 15px;
+      margin: 8px 0;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .quiz-option:hover {
+      background: #e9ecef;
+      border-color: #adb5bd;
+    }
+    
+    .quiz-option.selected {
+      background: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+    
+    .quiz-option.correct-answer {
+      background: #28a745 !important;
+      color: white !important;
+      border-color: #28a745 !important;
+    }
+    
+    .quiz-option.wrong-answer {
+      background: #dc3545 !important;
+      color: white !important;
+      border-color: #dc3545 !important;
+    }
+
+    .reveal-list {
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .reveal-list li {
+      margin: 8px 0;
+      padding: 5px 0;
+    }
+
+    pre code {
+      background: #1a1a1a !important;
+      color: #00ff00 !important;
+      padding: 20px !important;
+      border-radius: 8px !important;
+      font-family: 'Courier New', monospace !important;
+    }
+
+    /* Fragment animations */
+    .reveal .fragment.highlight-current-red.current-fragment {
+      color: #ff2c2d;
+    }
+    
+    .reveal .fragment.highlight-current-green.current-fragment {
+      color: #17ff2e;
+    }
+    
+    .reveal .fragment.highlight-current-blue.current-fragment {
+      color: #1b91ff;
+    }
+
+    /* Enhanced animations for Reveal.js */
+    .animate-fadeIn { 
+      animation: revealFadeIn 1s ease-in forwards; 
+      opacity: 0;
+    }
+    .animate-slideInLeft { 
+      animation: revealSlideInLeft 1s ease-out forwards; 
+      transform: translateX(-100%);
+    }
+    /* ... other animations ... */
+
+    @keyframes revealFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes revealSlideInLeft {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      
+    <section data-transition="convex" data-background-color="#ffffff" data-background-image="https://static.vecteezy.com/system/resources/previews/002/276/716/non_2x/abstract-geometric-background-in-flat-design-free-vector.jpg" data-audio-text="Welcome to the exciting world of React JS! On this first slide, we're introducing React as a powerful, open-source JavaScript library. Its main goal is to help you build interactive user interfaces efficiently. React is declarative, meaning you describe what you want, and React figures out how to render it. It's also component-based, allowing you to break down your UI into reusable, independent pieces. And the best part? You can 'learn once, write anywhere'—meaning your React knowledge is portable across different platforms.">
+      <div class="slide-content" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
+        <h2 style="position: absolute; top: 20px; left: 20px; right: 20px; z-index: 100; margin: 0; line-height: 1.2;">Introduction to React JS</h2>
+        <h3 style="position: absolute; top: 80px; left: 20px; right: 20px; font-size: 1.2em; color: #666; z-index: 100; margin: 0; line-height: 1.4;">Discover what React JS is and its core purpose in modern web development.</h3>
+        <div class="elements-container" style="position: absolute; top: 100px; left: 0; right: 0; bottom: 0;">
+          <div class="animate-slideInLeft" style="position: absolute;
+              left: 40px;
+              top: 120px;
+              width: 400px;
+              height: autopx;
+              font-size: 20px;
+              color: #cb7272;">
+                  <div class="text-element" style="background-color: rgba(255, 255, 255, 0.3); backdrop-filter: blur(4px);">
+                    <p>"React is a free and open-source front-end JavaScript library for building user interfaces based on UI components."</p>
+                  </div>
+                </div>
+<div class="animate-slideInDown" style="position: absolute;
+              left: 443px;
+              top: 280px;
+              width: 400px;
+              height: autopx;
+              font-size: 18px;
+              color: #000000;">
+                    <ul class="reveal-list" style=" background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(4px); color:black; ">
+                      <li class="fragment fade-in">Declarative: Makes your code more predictable and easier to debug.</li><li class="fragment fade-in">Component-Based: Build encapsulated components that manage their own state.</li><li class="fragment fade-in">Learn Once, Write Anywhere: Develop new features in React without rewriting existing code.</li>
+                    </ul>
+                  </div>
+        </div>
+      </div>
+      <aside class="notes">Welcome to the exciting world of React JS! On this first slide, we're introducing React as a powerful, open-source JavaScript library. Its main goal is to help you build interactive user interfaces efficiently. React is declarative, meaning you describe what you want, and React figures out how to render it. It's also component-based, allowing you to break down your UI into reusable, independent pieces. And the best part? You can 'learn once, write anywhere'—meaning your React knowledge is portable across different platforms.</aside>
+    </section>
+  
+
+    <section data-background-color="#ffffff" data-background-image="https://static.vecteezy.com/system/resources/previews/002/276/716/non_2x/abstract-geometric-background-in-flat-design-free-vector.jpg" data-audio-text="So, why should you choose React for your next project? One of its biggest strengths is the Virtual DOM. This clever mechanism allows React to update only the necessary parts of the actual browser DOM, leading to significant performance improvements. React's component-based architecture promotes reusability, meaning you write less code and develop faster. Plus, it boasts a massive and supportive community, providing a wealth of learning materials and solutions. Its declarative nature and one-way data binding also contribute to more predictable and maintainable code.">
+      <div class="slide-content" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
+        <h2 style="position: absolute; top: 20px; left: 20px; right: 20px; z-index: 100; margin: 0; line-height: 1.2;">Why Choose React?</h2>
+        <h3 style="position: absolute; top: 80px; left: 20px; right: 20px; font-size: 1.2em; color: #666; z-index: 100; margin: 0; line-height: 1.4;">Explore the key advantages that make React a popular choice for web development.</h3>
+        <div class="elements-container" style="position: absolute; top: 100px; left: 0; right: 0; bottom: 0;">
+          <div class="animate-slideInRight" style="position: absolute;
+              left: 100px;
+              top: 200px;
+              width: 640px;
+              height: 280px;
+              font-size: 18px;
+              color: #000000;">
+                    <ul class="reveal-list" style=" background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(4px); color:black; ">
+                      <li class="fragment fade-in">Virtual DOM: Improves performance by minimizing direct manipulation of the browser's DOM.</li><li class="fragment fade-in">Component Reusability: Encourages building reusable UI components, speeding up development.</li><li class="fragment fade-in">Strong Community Support: A large and active community offers extensive resources and tools.</li><li class="fragment fade-in">Declarative Views: Makes code more predictable and easier to debug.</li><li class="fragment fade-in">One-Way Data Binding: Simplifies data flow and makes debugging easier.</li>
+                    </ul>
+                  </div>
+        </div>
+      </div>
+      <aside class="notes">So, why should you choose React for your next project? One of its biggest strengths is the Virtual DOM. This clever mechanism allows React to update only the necessary parts of the actual browser DOM, leading to significant performance improvements. React's component-based architecture promotes reusability, meaning you write less code and develop faster. Plus, it boasts a massive and supportive community, providing a wealth of learning materials and solutions. Its declarative nature and one-way data binding also contribute to more predictable and maintainable code.</aside>
+    </section>
+  
+
+    <section data-background-color="#ffffff" data-background-image="https://static.vecteezy.com/system/resources/previews/002/276/716/non_2x/abstract-geometric-background-in-flat-design-free-vector.jpg" data-audio-text="At the heart of every React application are components. Think of them as individual LEGO bricks that you can combine to build complex structures. Each component is a self-contained unit of UI, responsible for rendering a specific part of your application. We primarily work with functional components today, which are simple JavaScript functions returning JSX, our UI description. While class components exist, functional components with Hooks are the modern standard for writing React code.">
+      <div class="slide-content" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
+        <h2 style="position: absolute; top: 20px; left: 20px; right: 20px; z-index: 100; margin: 0; line-height: 1.2;">Core Concept: Components</h2>
+        <h3 style="position: absolute; top: 80px; left: 20px; right: 20px; font-size: 1.2em; color: #666; z-index: 100; margin: 0; line-height: 1.4;">Understand React components as the fundamental building blocks of a React application.</h3>
+        <div class="elements-container" style="position: absolute; top: 100px; left: 0; right: 0; bottom: 0;">
+          <div class="animate-slideInDown" style="position: absolute;
+              left: 40px;
+              top: 140px;
+              width: 400px;
+              height: autopx;
+              font-size: 20px;
+              color: #000000;">
+                  <div class="text-element" style="background-color: rgba(255, 255, 255, 0); backdrop-filter: blur(4px);">
+                    <p>"Components are independent, reusable pieces of UI. They let you split the UI into independent, reusable pieces, and think about each piece in isolation."</p>
+                  </div>
+                </div>
+<div class="" style="position: absolute;
+              left: 460px;
+              top: 280px;
+              width: 400px;
+              height: autopx;
+              font-size: 18px;
+              color: #000000;">
+                    <ul class="reveal-list" style=" background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(4px); color:black; ">
+                      <li class="fragment fade-in">Functional Components: JavaScript functions that return JSX. (e.g., `function Welcome(props) { return <div>Hello, {props.name}</div>; }`)</li><li class="fragment fade-in">Class Components: ES6 classes that extend `React.Component` and have a `render()` method. (Less common in modern React for new features).</li>
+                    </ul>
+                  </div>
+        </div>
+      </div>
+      <aside class="notes">At the heart of every React application are components. Think of them as individual LEGO bricks that you can combine to build complex structures. Each component is a self-contained unit of UI, responsible for rendering a specific part of your application. We primarily work with functional components today, which are simple JavaScript functions returning JSX, our UI description. While class components exist, functional components with Hooks are the modern standard for writing React code.</aside>
+    </section>
+  
+
+    <section data-background-color="#ffffff" data-background-image="https://static.vecteezy.com/system/resources/previews/002/276/716/non_2x/abstract-geometric-background-in-flat-design-free-vector.jpg" data-audio-text="Next up is JSX, a key part of React's appeal. JSX is not HTML, nor is it a string; it's a syntax extension that lets you write HTML-like structures directly within your JavaScript code. This makes your UI code incredibly readable and intuitive, bridging the gap between structure and logic. Behind the scenes, tools like Babel transform your JSX into plain JavaScript objects that React can understand. This powerful feature enables React to give you more helpful errors and warnings, streamlining your development process.">
+      <div class="slide-content" style="position: relative; width: 100%; height: 100vh; overflow: hidden;">
+        <h2 style="position: absolute; top: 20px; left: 20px; right: 20px; z-index: 100; margin: 0; line-height: 1.2;">JSX: JavaScript XML</h2>
+        
+        <div class="elements-container" style="position: absolute; top: 60px; left: 0; right: 0; bottom: 0;">
+          <div class="" style="position: absolute;
+              left: 20px;
+              top: 60px;
+              width: 400px;
+              height: autopx;
+              font-size: 20px;
+              color: #000000;">
+                  <div class="text-element" style="background-color: rgba(255, 255, 255, 0); backdrop-filter: blur(4px);">
+                    <p>"JSX (JavaScript XML) is a syntax extension for JavaScript that looks like HTML. It allows you to write HTML elements and components in the same file as JavaScript code."</p>
+                  </div>
+                </div>
+<div class="" style="position: absolute;
+              left: 460px;
+              top: 260px;
+              width: 400px;
+              height: autopx;
+              font-size: 18px;
+              color: #000000;">
+                    <ul class="reveal-list" style=" background-color: rgba(255, 255, 255, 0.9); backdrop-filter: blur(4px); color:black; ">
+                      <li class="fragment fade-in">Makes UI code more readable and intuitive.</li><li class="fragment fade-in">Enables React to provide more useful error and warning messages.</li><li class="fragment fade-in">Gets compiled into regular JavaScript by tools like Babel.</li>
+                    </ul>
+                  </div>
+        </div>
+      </div>
+      <aside class="notes">Next up is JSX, a key part of React's appeal. JSX is not HTML, nor is it a string; it's a syntax extension that lets you write HTML-like structures directly within your JavaScript code. This makes your UI code incredibly readable and intuitive, bridging the gap between structure and logic. Behind the scenes, tools like Babel transform your JSX into plain JavaScript objects that React can understand. This powerful feature enables React to give you more helpful errors and warnings, streamlining your development process.</aside>
+    </section>
+  
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/reveal.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/notes/notes.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/search/search.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/zoom/zoom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/highlight/highlight.min.js"></script>
+  
+
+  <script>
+    // Initialize speech synthesis
+    const synth = window.speechSynthesis;
+    let currentUtterance = null;
+
+    // Function to speak slide content
+    function speakSlideContent(slide) {
+      // Cancel any ongoing speech
+      if (currentUtterance) {
+        synth.cancel();
+      }
+
+      // Get the transcript text from data-audio-text attribute
+      const transcript = slide.getAttribute('data-audio-text');
+      
+      if (transcript) {
+        // Create new utterance
+        currentUtterance = new SpeechSynthesisUtterance(transcript);
+        
+        // Configure speech settings
+        currentUtterance.rate = 1.0;  // Speech speed
+        currentUtterance.pitch = 1.0; // Speech pitch
+        currentUtterance.volume = 1.0; // Volume
+        
+        // Use first available voice
+        const voices = synth.getVoices();
+        if (voices.length > 0) {
+          currentUtterance.voice = voices[0];
+        }
+        
+        // Speak the content
+        synth.speak(currentUtterance);
+      }
+    }
+
+    Reveal.initialize({
+      hash: true,
+      history: true,
+      controls: true,
+      progress: true,
+      center: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      navigationMode: 'default',
+      shuffle: false,
+      fragments: true,
+      fragmentInURL: false,
+      embedded: false,
+      help: true,
+      showNotes: false,
+      autoSlide: 0,
+      autoSlideStoppable: true,
+      mouseWheel: false,
+      hideInactiveCursor: true,
+      previewLinks: false,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      width: '80%',
+      height: '100%',
+      zoom:'0',
+      plugins: [RevealNotes, RevealSearch, RevealZoom, RevealHighlight]
+    });
+
+    // Quiz interaction functionality
+    function selectQuizAnswer(element, selectedIndex, correctIndex) {
+      const quizContainer = element.closest('.quiz-container');
+      const options = quizContainer.querySelectorAll('.quiz-option');
+      
+      // Remove previous selections
+      options.forEach(opt => {
+        opt.classList.remove('selected', 'correct-answer', 'wrong-answer');
+      });
+      
+      // Mark selected answer
+      element.classList.add('selected');
+      
+      // Show correct/incorrect after a brief delay
+      setTimeout(() => {
+        if (selectedIndex === correctIndex) {
+          element.classList.add('correct-answer');
+        } else {
+          element.classList.add('wrong-answer');
+          // Also highlight the correct answer
+          options[correctIndex].classList.add('correct-answer');
+        }
+      }, 500);
+    }
+
+    // Audio, speech, and animation synchronization
+    Reveal.addEventListener('slidechanged', function(event) {
+      const slide = event.currentSlide;
+      
+      // Speak the slide content
+      speakSlideContent(slide);
+      
+      const audio = slide.querySelector('audio');
+      if (audio) {
+        // Play audio when slide changes
+        audio.play();
+        
+        // Trigger animations based on audio timing
+        const animatedElements = slide.querySelectorAll('[data-animation-delay]');
+        animatedElements.forEach(element => {
+          const delay = parseInt(element.dataset.animationDelay) || 0;
+          setTimeout(() => {
+            element.classList.add('animate');
+          }, delay);
+        });
+      }
+    });
+
+    // Add keyboard shortcut to toggle speech
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'p' || event.key === 'P') {
+        const currentSlide = Reveal.getCurrentSlide();
+        if (synth.speaking) {
+          synth.cancel();
+        } else {
+          speakSlideContent(currentSlide);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
