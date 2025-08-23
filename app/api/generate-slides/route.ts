@@ -1,12 +1,12 @@
 import { generateText } from "ai"
-import { openai } from "@ai-sdk/openai"
-import { google } from "@ai-sdk/google"
-import { anthropic } from "@ai-sdk/anthropic"
+import { createOpenAI, openai } from "@ai-sdk/openai"
+import { createGoogleGenerativeAI, google } from "@ai-sdk/google"
+import { anthropic, createAnthropic } from "@ai-sdk/anthropic"
 import { type NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {
   try {
-    const { topic, slideCount, audience, style, provider, model, apiKey, customPrompt } = await request.json()
+    const { topic, slideCount, audience, style, provider, model, customPrompt } = await request.json();
     // console.log("Request",await request.json());
 
     console.log("API Request received:", { provider, model, topic, slideCount })
@@ -172,13 +172,22 @@ return the response as the above format , and do remember the ${topic} is the to
     try {
       switch (provider) {
         case "openai":
-          aiModel = openai(model, { apiKey })
+          const openai=createOpenAI({
+            apiKey: request.headers.get("x-api-key") ?? undefined
+          });
+          aiModel = openai(model)
           break
         case "google":
-          aiModel = google(model, { apiKey })
+          const google=createGoogleGenerativeAI({
+            apiKey: request.headers.get("x-api-key") ?? undefined
+          })
+          aiModel = google(model)
           break
         case "anthropic":
-          aiModel = anthropic(model, { apiKey })
+          const anthropic =createAnthropic({
+            apiKey: request.headers.get("x-api-key") ?? undefined
+          });
+          aiModel = anthropic(model)
           break
         default:
           return NextResponse.json({ error: "Unsupported AI provider" }, { status: 400 })
@@ -187,7 +196,7 @@ return the response as the above format , and do remember the ${topic} is the to
       console.log("Using AI model:", provider, model)
 
       const { text } = await generateText({
-        model: google("gemini-2.0-flash"),
+        model: aiModel,
         prompt,
         temperature: 0.7,
       })
