@@ -1,7 +1,7 @@
 import { generateText } from "ai"
-import { openai } from "@ai-sdk/openai"
-import { google } from "@ai-sdk/google"
-import { anthropic } from "@ai-sdk/anthropic"
+import { createOpenAI, openai } from "@ai-sdk/openai"
+import { createGoogleGenerativeAI, google } from "@ai-sdk/google"
+import { anthropic, createAnthropic } from "@ai-sdk/anthropic"
 import { type NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {
@@ -49,13 +49,22 @@ Make sure:
     try {
       switch (provider) {
         case "openai":
-          aiModel = openai(model, { apiKey })
+          const openai=createOpenAI({
+            apiKey: request.headers.get("x-api-key") ?? undefined
+          });
+          aiModel = openai(model)
           break
         case "google":
-          aiModel = google(model, { apiKey })
+          const google=createGoogleGenerativeAI({
+            apiKey: request.headers.get("x-api-key") ?? undefined
+          })
+          aiModel = google(model)
           break
         case "anthropic":
-          aiModel = anthropic(model, { apiKey })
+          const anthropic =createAnthropic({
+            apiKey: request.headers.get("x-api-key") ?? undefined
+          });
+          aiModel = anthropic(model)
           break
         default:
           return NextResponse.json({ error: "Unsupported AI provider" }, { status: 400 })

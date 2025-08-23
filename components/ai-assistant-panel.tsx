@@ -284,25 +284,7 @@ export function AIAssistantPanel({
       }
 
       const data = await response.json()
-//       const data= {
-//     "slides": [
-//         {
-//             "title": "Introduction to react js",
-//             "summary": "AI-generated content",
-//             "elements": [
-//                 {
-//                     "type": "text",
-//                     "content": "```json\n{\n  \"slides\": [\n    {\n      \"id\": \"slide-1\",\n      \"title\": \"React.js: A Dynamic Introduction\",\n      \"summary\": \"Get ready to explore the world of React.js!\",\n      \"elements\": [\n        {\n          \"id\": \"el-1\",\n          \"type\": \"text\",\n          \"content\": \"Welcome to the exciting journey of learning React.js!\",\n          \"x\": 50,\n          \"y\": 100,\n          \"fontSize\": 32,\n          \"color\": \"#FFFFFF\"\n        },\n        {\n          \"id\": \"el-2\",\n          \"type\": \"text\",\n          \"content\": \"This course will guide you through the fundamental concepts and practical applications of React.js.\",\n          \"x\": 50,\n          \"y\": 200,\n          \"fontSize\": 20,\n          \"color\": \"#FFFFFF\"\n        }\n      ],\n      \"backgroundImage\": \"https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJhY2tncm91bmQlMjBjb2xvcnN8ZW58MHx8MHx8fDA%3D&w=1000&q=80\",\n      \"transition\": \"slide\",\n      \"transitionSpeed\": \"fast\"\n    },\n    {\n      \"id\": \"slide-2\",\n      \"title\": \"What is React.js?\",\n      \"summary\": \"Understanding the basics of React.js and its purpose.\",\n      \"elements\": [\n        {\n          \"id\": \"el-3\",\n          \"type\": \"text\",\n          \"content\": \"React.js is a powerful JavaScript library for building user interfaces (UIs).\",\n          \"x\": 50,\n          \"y\": 100,\n          \"fontSize\": 28,\n          \"color\": \"#FFFFFF\"\n        },\n        {\n          \"id\": \"el-4\",\n          \"type\": \"list\",\n          \"content\": \"Key Features:\\n- Component-Based Architecture\\n- Declarative Programming\\n- Efficient Updates with Virtual DOM\",\n          \"x\": 50,\n          \"y\": 180,\n          \"fontSize\": 22,\n          \"color\": \"#FFFFFF\"\n        }\n      ],\n      \"backgroundImage\": \"https://images.unsplash.com/photo-1519682337058-a94d5a3034e4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y29sb3JlZCUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D&w=1000&q=80\",\n      \"transition\": \"slide\",\n      \"transitionSpeed\": \"fast\"\n    },\n    {\n      \"id\": \"slide-3\",\n      \"title\": \"Components: The Building Blocks\",\n      \"summary\": \"Exploring the fundamental concept of components in React.js.\",\n      \"elements\": [\n        {\n          \"id\": \"el-5\",\n          \"type\": \"text\",\n          \"content\": \"Components are reusable, independent parts of a UI.\",\n          \"x\": 50,\n          \"y\": 100,\n          \"fontSize\": 28,\n          \"color\": \"#FFFFFF\"\n        },\n        {\n          \"id\": \"el-6\",\n          \"type\": \"list\",\n          \"content\": \"Two Types of Components:\\n- Functional Components (using functions)\\n- Class Components (using ES6 classes)\",\n          \"x\": 50,\n          \"y\": 180,\n          \"fontSize\": 22,\n          \"color\": \"#FFFFFF\"\n        },\n        {\n          \"id\": \"el-7\",\n          \"type\": \"text\",\n          \"content\": \"Components allow for modular and maintainable code.\",\n          \"x\": 50,\n          \"y\": 300,\n          \"fontSize\": 22,\n          \"color\": \"#FFFFFF\"\n        }\n      ],\n      \"backgroundImage\": \"https://images.unsplash.com/photo-1531297484003-eeef8e3d48c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNvbG9yZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D&w=1000&q=80\",\n      \"transition\": \"slide\",\n      \"transitionSpeed\": \"fast\"\n    },\n    {\n      \"id\": \"slide-4\",\n      \"title\": \"JSX: JavaScript XML\",\n      \"summary\": \"Understanding JSX syntax for writing UI components.\",\n      \"elements\": [\n        {\n          \"id\": \"el-8\",\n          \"type\": \"text\",\n          \"content\": \"JSX is a syntax extension to JavaScript that allows you to write HTML-like code in your JavaScript files.\",\n          \"x\": 50,\n          \"y\": 100,\n          \"fontSize\": 24,\n          \"color\": \"#FFFFFF\"\n        },\n        {\n          \"id\": \"el-9\",\n          \"type\": \"text\",\n          \"content\": \"Example: \\n`const element = <h1>Hello, world!</h1>;`\",\n          \"x\": 50,\n          \"y\": 200,\n          \"fontSize\": 22,\n          \"color\": \"#FFFFFF\"\n        },\n        {\n          \"id\": \"el-10\",\n          \"type\": \"text\",\n          \"content\": \"JSX gets transformed into regular JavaScript function calls.\",\n          \"x\": 50,\n          \"y\": 300,\n          \"fontSize\": 22,\n          \"color\": \"#FFFFFF\"\n        }\n      ],\n      \"backgroundImage\": \"https://images.unsplash.com/photo-1587560694229-67df47753cb9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNvbG9yZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D&w=1000&q=80\",\n      \"transition\": \"slide\",\n      \"transitionSpeed\": \"fast\"\n    },\n    {\n      \"id\": \"slide-5\",\n      \"title\": \"Knowledge Check!\",\n      \"summary\": \"Test your understanding of React.js basics.\",\n      \"elements\": [\n        {\n          \"id\": \"el-11\",\n          \"type\": \"text\",\n          \"content\": \"Question: What is the primary purpose of React.js?\",\n          \"x\": 50,\n          \"y\": 100,\n          \"fontSize\": 24,\n          \"color\": \"#FFFFFF\"\n        },\n        {\n          \"id\": \"el-12\",\n          \"type\": \"list\",\n          \"content\": \"Options:\\nA) Building server-side applications\\nB) Creating user interfaces\\nC) Managing databases\\nD) Styling web pages\",\n          \"x\": 50,\n          \"y\": 180,\n          \"fontSize\": 22,\n          \"color\": \"#FFFFFF\"\n        },\n        {\n          \"id\": \"el-13\",\n          \"type\": \"text\",\n          \"content\": \"Correct Answer: B\",\n          \"x\": 50,\n          \"y\": 300,\n          \"fontSize\": 22,\n          \"color\": \"#FFFFFF\"\n        }\n      ],\n      \"backgroundImage\": \"https://images.unsplash.com/photo-1555952517-2e8e729e0b44?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGNvbG9yZSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D&w=1000&q=80\",\n      \"transition\": \"slide\",\n      \"transitionSpeed\": \"fast\"\n    }\n  ],\n  \"exportedAt\": \"2025-10-27T10:00:00.000Z\",\n  \"format\": \"slide-editor-v2\",\n  \"version\": \"2.0.0\"\n}\n```",
-//                     "position": {
-//                         "x": 50,
-//                         "y": 100
-//                     }
-//                 }
-//             ],
-//             "transcript": "Generated content about Introduction to react js"
-//         }
-//     ]
-// }
+
       console.log("AI Response received:", data)
 
       // Convert AI response to proper slides
@@ -330,7 +312,7 @@ export function AIAssistantPanel({
     try {
       const response = await fetch("/api/enhance-content", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-api-key":settings.apiKeys[settings.provider] || "" },
         body: JSON.stringify({
           content: selectedElement.content,
           type: enhancementType,
@@ -367,7 +349,7 @@ export function AIAssistantPanel({
 
       const response = await fetch("/api/generate-quiz", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "x-api-key":settings.apiKeys[settings.provider] || "" },
         body: JSON.stringify({
           content: contentToUse,
           difficulty: quizDifficulty,
