@@ -139,6 +139,11 @@ export function RevealExportDialog({ open, onOpenChange, slides, currentSlide }:
         if (slide.backgroundImage) slideAttrs.push(`data-background-image="${slide.backgroundImage}"`)
         if (slide.backgroundVideo) slideAttrs.push(`data-background-video="${slide.backgroundVideo}"`)
         if (slide.backgroundSize) slideAttrs.push(`data-background-size="${slide.backgroundSize}"`)
+        
+        // Add transcript for speech synthesis
+        const transcript = slide.transcript || slide.speakerNotes;
+        console.log("Export transcript from transcript")
+        if (transcript) slideAttrs.push(`data-audio-text="${transcript.replace(/"/g, '&quot;')}"`)
 
         // Calculate proper spacing for title and subtitle
         const titleHeight = slide.title ? 40 : 0
@@ -221,7 +226,7 @@ export function RevealExportDialog({ open, onOpenChange, slides, currentSlide }:
                 break
               case "list":
                 elementHTML = `<div class="${combinedClass}" style="${style}">
-                    <ul class="reveal-list" style="background-color: ${element.backgroundColor || "rgba(255, 255, 255, 0.9)"}; backdrop-filter: blur(4px);">
+                    <ul class="reveal-list" style=" background-color: ${element.backgroundColor || "rgba(255, 255, 255, 0.9)"}; backdrop-filter: blur(4px); color:black; ">
                       ${element.content
                         .split("\n")
                         .filter((item) => item.trim())
@@ -416,6 +421,40 @@ export function RevealExportDialog({ open, onOpenChange, slides, currentSlide }:
   ${plugins.math ? '<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.3.1/plugin/math/math.min.js"></script>' : ""}
 
   <script>
+    // Initialize speech synthesis
+    const synth = window.speechSynthesis;
+    let currentUtterance = null;
+
+    // Function to speak slide content
+    function speakSlideContent(slide) {
+      // Cancel any ongoing speech
+      if (currentUtterance) {
+        synth.cancel();
+      }
+
+      // Get the transcript text from data-audio-text attribute
+      const transcript = slide.getAttribute('data-audio-text');
+      
+      if (transcript) {
+        // Create new utterance
+        currentUtterance = new SpeechSynthesisUtterance(transcript);
+        
+        // Configure speech settings
+        currentUtterance.rate = 1.0;  // Speech speed
+        currentUtterance.pitch = 1.0; // Speech pitch
+        currentUtterance.volume = 1.0; // Volume
+        
+        // Use first available voice
+        const voices = synth.getVoices();
+        if (voices.length > 0) {
+          currentUtterance.voice = voices[0];
+        }
+        
+        // Speak the content
+        synth.speak(currentUtterance);
+      }
+    }
+
     Reveal.initialize({
       hash: ${config.hash},
       history: ${config.history},
@@ -440,7 +479,7 @@ export function RevealExportDialog({ open, onOpenChange, slides, currentSlide }:
       transition: '${config.transition}',
       transitionSpeed: '${config.transitionSpeed}',
       backgroundTransition: '${config.backgroundTransition}',
-      width: '100%',
+      width: '80%',
       height: '100%',
       zoom:'0',
       plugins: [${pluginScripts.join(", ")}]
@@ -471,11 +510,14 @@ export function RevealExportDialog({ open, onOpenChange, slides, currentSlide }:
       }, 500);
     }
 
-    // Audio and animation synchronization
+    // Audio, speech, and animation synchronization
     Reveal.addEventListener('slidechanged', function(event) {
       const slide = event.currentSlide;
-      const audio = slide.querySelector('audio');
       
+      // Speak the slide content
+      speakSlideContent(slide);
+      
+      const audio = slide.querySelector('audio');
       if (audio) {
         // Play audio when slide changes
         audio.play();
@@ -488,6 +530,18 @@ export function RevealExportDialog({ open, onOpenChange, slides, currentSlide }:
             element.classList.add('animate');
           }, delay);
         });
+      }
+    });
+
+    // Add keyboard shortcut to toggle speech
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'p' || event.key === 'P') {
+        const currentSlide = Reveal.getCurrentSlide();
+        if (synth.speaking) {
+          synth.cancel();
+        } else {
+          speakSlideContent(currentSlide);
+        }
       }
     });
   </script>

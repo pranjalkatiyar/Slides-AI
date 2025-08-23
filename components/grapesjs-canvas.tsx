@@ -93,39 +93,56 @@ export function GrapesJSCanvas({
 
   // Auto-play animations when slide is playing
   useEffect(() => {
-    if (isPlaying && isPreviewMode) {
-      // Sort elements by animation delay and fragment index
-      const elementsWithAnimations = slide.elements
-        .filter((el) => el.animation && el.animation !== "none")
-        .sort((a, b) => {
-          const delayA = (a.animationDelay || 0) + (a.fragmentIndex || 0) * 1000
-          const delayB = (b.animationDelay || 0) + (b.fragmentIndex || 0) * 1000
-          return delayA - delayB
+    if (!isPlaying || !isPreviewMode) {
+      setPlayingAnimations(new Set())
+      return
+    }
+
+    const timeouts: NodeJS.Timeout[] = []
+    const elementsWithAnimations = slide.elements
+      .filter((el) => el.animation && el.animation !== "none")
+      .sort((a, b) => {
+        const delayA = (a.animationDelay || 0) + (a.fragmentIndex || 0) * 1000
+        const delayB = (b.animationDelay || 0) + (b.fragmentIndex || 0) * 1000
+        return delayA - delayB
+      })
+
+    // Start all animations
+    elementsWithAnimations.forEach((element, index) => {
+      const totalDelay = (element.animationDelay || 0) + (element.fragmentIndex || 0) * 1000
+      const duration = element.animationDuration || 1000
+
+      // Add to playing animations after delay
+      const startTimeout = setTimeout(() => {
+        setPlayingAnimations((prev) => {
+          const newSet = new Set(prev)
+          newSet.add(element.id)
+          return newSet
         })
 
-      // Trigger animations in sequence
-      elementsWithAnimations.forEach((element, index) => {
-        const totalDelay = (element.animationDelay || 0) + (element.fragmentIndex || 0) * 1000
+        // Remove from playing animations after duration
+        const endTimeout = setTimeout(() => {
+          setPlayingAnimations((prev) => {
+            const newSet = new Set(prev)
+            newSet.delete(element.id)
+            return newSet
+          })
 
-        setTimeout(() => {
-          setPlayingAnimations((prev) => new Set(prev).add(element.id))
+          // Call completion callback after last animation
+          if (index === elementsWithAnimations.length - 1) {
+            onAnimationComplete?.()
+          }
+        }, duration)
 
-          // Remove animation after duration
-          setTimeout(() => {
-            setPlayingAnimations((prev) => {
-              const newSet = new Set(prev)
-              newSet.delete(element.id)
-              return newSet
-            })
+        timeouts.push(endTimeout)
+      }, totalDelay)
 
-            // Call completion callback for last animation
-            if (index === elementsWithAnimations.length - 1) {
-              onAnimationComplete?.()
-            }
-          }, element.animationDuration || 1000)
-        }, totalDelay)
-      })
-    } else {
+      timeouts.push(startTimeout)
+    })
+
+    // Cleanup all timeouts on unmount or when dependencies change
+    return () => {
+      timeouts.forEach(clearTimeout)
       setPlayingAnimations(new Set())
     }
   }, [isPlaying, isPreviewMode, slide.elements, onAnimationComplete])
@@ -446,21 +463,39 @@ export function GrapesJSCanvas({
   }
 
   const getAnimationClass = (element: SlideElement) => {
-    if (!element.animation || element.animation === "none") return ""
-    if (animatingElements.has(element.id) || playingAnimations.has(element.id)) {
-      return `animate-${element.animation}`
+    const classes = ["slide-element"]
+    
+    if (!element.animation || element.animation === "none") {
+      return classes.join(" ")
     }
-    return ""
+    
+    if (animatingElements.has(element.id) || playingAnimations.has(element.id)) {
+      classes.push(`animate-${element.animation}`)
+    }
+    
+    return classes.join(" ")
   }
 
   const getAnimationStyle = (element: SlideElement) => {
     if (!element.animation || element.animation === "none") return {}
-    if (!animatingElements.has(element.id) && !playingAnimations.has(element.id)) return {}
-
-    return {
+    
+    const isAnimating = animatingElements.has(element.id) || playingAnimations.has(element.id)
+    const style = {
+      opacity: isAnimating ? 0 : 1,
       animationDelay: `${element.animationDelay || 0}ms`,
-      animationDuration: `${element.animationDuration || 1000}ms`,
+    } as React.CSSProperties
+
+    if (isAnimating) {
+      Object.assign(style, {
+        willChange: "transform, opacity",
+        animationFillMode: "both",
+        animationPlayState: "running",
+        // Set animation duration as a CSS variable
+        [`--animation-duration`]: `${element.animationDuration || 1000}ms`,
+      })
     }
+
+    return style
   }
 
   const renderResizeHandles = (elementId: string) => {
@@ -958,7 +993,7 @@ export function GrapesJSCanvas({
                   backdropFilter: "blur(4px)",
                 }}
               >
-                <ul className="list-disc list-inside space-y-1">
+                <ul className="list-disc list-inside space-y-1 text-black">
                   {element.content
                     .split("\n")
                     .filter((item) => item.trim())
@@ -1051,7 +1086,17 @@ export function GrapesJSCanvas({
   return (
     <div className="h-full flex flex-col bg-gray-100">
       {/* Enhanced Animation CSS */}
-      <style jsx>{`
+      <style jsx global>{`
+        .slide-element {
+          opacity: 1;
+          transform: translate(0, 0) scale(1) rotate(0deg);
+          transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+        
+        .slide-element[data-animating="true"] {
+          will-change: transform, opacity;
+        }
+
         @keyframes animate-fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
@@ -1091,15 +1136,15 @@ export function GrapesJSCanvas({
           90% { transform: translate3d(0,-4px,0); }
         }
         
-        .animate-fadeIn { animation: animate-fadeIn 1s ease-in forwards; }
-        .animate-slideInLeft { animation: animate-slideInLeft 1s ease-out forwards; }
-        .animate-slideInRight { animation: animate-slideInRight 1s ease-out forwards; }
-        .animate-slideInUp { animation: animate-slideInUp 1s ease-out forwards; }
-        .animate-slideInDown { animation: animate-slideInDown 1s ease-out forwards; }
-        .animate-zoomIn { animation: animate-zoomIn 1s ease-out forwards; }
-        .animate-zoomOut { animation: animate-zoomOut 1s ease-out forwards; }
-        .animate-rotateIn { animation: animate-rotateIn 1s ease-out forwards; }
-        .animate-bounce { animation: animate-bounce 1s ease-out forwards; }
+        .animate-fadeIn { animation: animate-fadeIn var(--animation-duration, 1s) ease-in both; }
+        .animate-slideInLeft { animation: animate-slideInLeft var(--animation-duration, 1s) ease-out both; }
+        .animate-slideInRight { animation: animate-slideInRight var(--animation-duration, 1s) ease-out both; }
+        .animate-slideInUp { animation: animate-slideInUp var(--animation-duration, 1s) ease-out both; }
+        .animate-slideInDown { animation: animate-slideInDown var(--animation-duration, 1s) ease-out both; }
+        .animate-zoomIn { animation: animate-zoomIn var(--animation-duration, 1s) ease-out both; }
+        .animate-zoomOut { animation: animate-zoomOut var(--animation-duration, 1s) ease-out both; }
+        .animate-rotateIn { animation: animate-rotateIn var(--animation-duration, 1s) ease-out both; }
+        .animate-bounce { animation: animate-bounce var(--animation-duration, 1s) ease-out both; }
       `}</style>
 
       {/* Collapsible Canvas Header */}
@@ -1343,9 +1388,9 @@ export function GrapesJSCanvas({
             {slide.elements.map(renderElement)}
 
             {/* Enhanced Selection indicator - Positioned based on header state */}
-            {selectedElementId && !isPreviewMode && (
+            {/* {selectedElementId && !isPreviewMode && (
               <div
-                className={`absolute ${isHeaderCollapsed ? "top-2" : "top-4"} left-4 bg-blue-500 text-white px-3 py-1 rounded text-xs z-50`}
+                className={`absolute ${isHeaderCollapsed ? "top-2" : "top-4"} left-4 bg-blue-500 bg-transparent text-white px-3 py-1 rounded text-xs z-50`}
               >
                 <div className="flex items-center gap-2">
                   <span>Element selected</span>
@@ -1355,7 +1400,7 @@ export function GrapesJSCanvas({
                 </div>
                 <p className="text-xs mt-1 opacity-80">Drag to move • Resize with handles • Double-click to edit</p>
               </div>
-            )}
+            )} */}
 
             {/* Animation Status - Positioned based on header state */}
             {(playingAnimations.size > 0 || animatingElements.size > 0) && (
@@ -1396,8 +1441,24 @@ export function GrapesJSCanvas({
       </div>
 
       {/* Hidden file inputs */}
-      <input ref={audioInputRef} type="file" accept="audio/*" onChange={handleAudioChange} className="hidden" />
-      <input ref={imageInputRef} type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+      <input
+        ref={audioInputRef}
+        type="file"
+        accept="audio/*"
+        onChange={handleAudioChange}
+        className="hidden"
+        title="Upload Audio"
+        aria-label="Upload Audio"
+      />
+      <input
+        ref={imageInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
+        className="hidden"
+        title="Upload Image"
+        aria-label="Upload Image"
+      />
     </div>
   )
 }

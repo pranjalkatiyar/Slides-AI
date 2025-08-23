@@ -265,7 +265,8 @@ export default function SlideEditor() {
               </>
             )}
           </div>
-
+          
+          {/* Commented Playback Controls */}
           <PlaybackControls
             isPlaying={isPlaying}
             canGoPrev={currentIdx > 0}

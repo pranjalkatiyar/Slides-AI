@@ -23,7 +23,7 @@ export function PlaybackControls({
   isPlaying,
   canGoPrev,
   canGoNext,
-  autoPlay,
+  autoPlay=false,
   onPlay,
   onPause,
   onPrev,
